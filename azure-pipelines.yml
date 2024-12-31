@@ -44,4 +44,9 @@ jobs:
     inputs:
       PathtoPublish: $(build.artifactstagingdirectory)
       TargetPath: '\\my\share\$(Build.DefinitionName)\$(Build.BuildNumber)'
-...
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo Artifact Staging Directory
+        echo $(build.artifactstagingdirectory)
+        echo Hello world
