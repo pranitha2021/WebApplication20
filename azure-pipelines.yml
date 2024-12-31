@@ -77,6 +77,12 @@ jobs:
         downloadType: 'single'
         artifactName: 'drop'
         downloadPath: '$(build.artifactstagingdirectory)' #'$(Build.SourcesDirectory)'
+         # Step 2: Copy Web API files to IIS server folder
+    - task: ExtractFiles@1
+      displayName: 'Extract published files'
+      inputs:
+        archiveFilePatterns: '$(build.artifactstagingdirectory)/drop/*.zip'  # Path to the zip file in the 'drop' folder
+        destinationFolder: '$(build.artifactstagingdirectory)/extracted'  # Destination folder where files will be extracted
     - task: CopyFiles@2
       displayName: 'Copy Web API files to IIS folder'
       inputs:
