@@ -72,8 +72,14 @@ jobs:
       inputs:
         buildType: 'specific'
         project: $(System.TeamProject)
-        definition: '33'  # $(Build.DefinitionId)
+        definition: '3'  # $(Build.DefinitionId)
         buildVersionToDownload: 'latest'
         downloadType: 'single'
         artifactName: 'drop'
         downloadPath: '$(build.artifactstagingdirectory)' #'$(Build.SourcesDirectory)'
+    - task: CopyFiles@2
+      displayName: 'Copy Web API files to IIS folder'
+      inputs:
+        SourceFolder: '$(build.artifactstagingdirectory)/extracted' #'$(buildOutputFolder)/webapi'
+        Contents: '**'
+        TargetFolder: 'C:\inetpub\wwwroot\newfolder'  # Change this path to your IIS folder   
